@@ -1,12 +1,8 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import add from '../imgs/add.png';
-import Footer from './footer';
-import { Link } from 'react-router-dom';
 
-export default function NewEntry(){
+export default function NewEntry() {
 
     const navigate = useNavigate();
 
@@ -31,7 +27,7 @@ export default function NewEntry(){
     const handleCreateClick = async (e) => {
         e.preventDefault();
 
-        const data =  {
+        const data = {
             roll_number: formData.rollnumber,
             name: formData.name,
             department: formData.department,
@@ -41,60 +37,76 @@ export default function NewEntry(){
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/inwardcreate/', data);
+            const response = await axios.post('http://localhost:8000/compose/', data);
             console.log('Response:', response);
             alert('Entry created successfully');
+
+            setFormData({
+                rollnumber: '',
+                name: '',
+                department: '',
+                subject: '',
+                remark: '',
+                applicationdocument: ''
+            });
         }
         catch (error) {
             console.error('Error:', error);
             alert('An error occurred');
         }
 
-        navigate('/');
+        navigate(0);
     };
 
-    return(
+    return (
         <>
-                <Link to="/" className="back_button"> Home </Link>
+            <div className="newentry-container">
+                <h1 className="newentry-heading">NEW ENTRY</h1>
+                <form className="input-container" onSubmit={handleCreateClick}>
+                    <div className="label">
+                        <label htmlFor="rollnumber">ROLL NUMBER</label>
+                        <input type="text" name="rollnumber" className="input" value={formData.rollnumber} onChange={handleChange} />
+                    </div>
+                    <div className="label">
+                        <label htmlFor="name">NAME</label>
+                        <input type="text" name="name" className="input" value={formData.name} onChange={handleChange} />
+                    </div>
+                    <div className="label">
+                        <label htmlFor="department">DEPARTMENT</label>
+                        <input type="text" name="department" className="input" value={formData.department} onChange={handleChange} />
+                    </div>
+                    <div className="label">
+                        <label htmlFor="subject">SUBJECT</label>
+                        <input type="text" name="subject" className="input" value={formData.subject} onChange={handleChange} />
+                    </div>
+                    <div className="label">
+                        <label htmlFor="remark">REMARK</label>
+                        <input type="text" name="remark" className="input" value={formData.remark} onChange={handleChange} />
+                    </div>
+                    <div className="label">
+                        <label htmlFor="applicationdocument">TYPE</label>
+                        <select
+                            name="applicationdocument"
+                            id="applicationdocument"
+                            className="input"
+                            value={formData.applicationdocument}
+                            onChange={handleChange}
+                        >
+                            <option value="">Select Type</option>
+                            <option value="Application">Application</option>
+                            <option value="Letter">Letter</option>
+                            <option value="Document">Document</option>
+                        </select>
+                    </div>
 
-        <div className="newentry-container">
-            <h1>NEW ENTRY</h1>
-            <form className="input-container" onSubmit={handleCreateClick}>
-                <div className="label">
-                    <label htmlFor="rollnumber">ROLL NUMBER</label>
-                    <input type="text" name="rollnumber" className="input" value={formData.rollnumber} onChange={handleChange}/>
-                </div>
-                <div className="label">
-                    <label htmlFor="name">NAME</label>
-                    <input type="text" name="name" className="input" value={formData.name} onChange={handleChange}/>
-                </div>
-                <div className="label">
-                    <label htmlFor="department">DEPARTMENT</label>
-                    <input type="text" name="department" className="input" value={formData.department} onChange={handleChange}/>
-                </div>
-                <div className="label">
-                    <label htmlFor="subject">SUBJECT</label>
-                    <input type="text" name="subject" className="input" value={formData.subject} onChange={handleChange}/>
-                </div>
-                <div className="label">
-                    <label htmlFor="remark">REMARK</label>
-                    <input type="text" name="remark" className="input" value={formData.remark} onChange={handleChange}/>
-                </div>  
-                <div className="label">
-                    <label htmlFor="applicationdocument">APPLICATION DOCUMENT</label>
-                    <input type="text" name="applicationdocument" className="input" value={formData.applicationdocument} onChange={handleChange}/>
-                </div>
-                    
-                <div className="create-container">
-                    <button className="create" onClick={handleCreateClick} >
-                        <div >Create
-                            <img src={add} alt="" className="create-button-img" />
-                        </div>
-                    </button>
-                </div> 
-            </form>  
-        </div>
-        <Footer /> 
+                    <div className="create-container">
+                        <button className="create" onClick={handleCreateClick} >
+                            <div > Create Entry
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </>
     );
 }

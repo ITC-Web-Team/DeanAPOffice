@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import magnifyingglass from '../imgs/magnifying-glass.png';
 
-export default function SearchBar({onSearch}){
-    const [search , setSearch] = useState('');
+export default function SearchBar({ onSearch }) {
+    const [search, setSearch] = useState('');
 
     const handleSearch = (e) => {
         e.preventDefault();
         onSearch(search);
     };
 
-    return(
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setSearch(value);
+        if (value === '') {
+            onSearch('');
+        }
+    };
+
+    return (
         <div className="searchbar-container">
-           <form onSubmit={handleSearch}>
-                <input 
-                    type="text" 
-                    placeholder="Search" 
+            <form onSubmit={handleSearch} className="searchbar-form">
+                <input
+                    type="text"
+                    placeholder="Search"
                     className="searchbar"
-                    onChange={(e)=> setSearch(e.target.value)}
+                    value={search}
+                    onChange={handleChange}
                 />
-                <span type="submit" className="search-button">
+                <button type="submit" className="search-button">
                     <img src={magnifyingglass} alt="search-icon" className="search-icon" />
-                </span>
-           </form>
+                </button>
+            </form>
         </div>
-    )
+    );
 }

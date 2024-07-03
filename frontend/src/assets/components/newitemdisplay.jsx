@@ -1,16 +1,16 @@
 import React from "react";
 
-export default function Itemdisplay(){
+export default function ItemDisplay(){
     return(
         <div className="item-container">
-            <div className="id boxes">id</div>
-            <div className="roll boxes">roll</div>
-            <div className="date boxes">date</div>
-            <div className="name boxes">name</div>
-            <div className="department boxes">department</div>
-            <div className="subject boxes">subject</div>
-            <div className="remarks boxes">remarks</div>
-            <div className="application-document boxes">app/doc</div>
+            <div className="id boxes">ID</div>
+            <div className="roll boxes">Roll Number</div>
+            <div className="date boxes">Date</div>
+            <div className="name boxes">Name</div>
+            <div className="department boxes">Department</div>
+            <div className="subject boxes">Subject</div>
+            <div className="remarks boxes">Remarks</div>
+            <div className="application-document boxes">Type</div>
         </div>
     );
 }

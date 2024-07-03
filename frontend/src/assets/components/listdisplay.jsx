@@ -1,58 +1,62 @@
 import React,{useState , useEffect} from "react";
-import ListItem from "./listlabel";
+import ListItem from "./ListLabel";
 import { Link } from "react-router-dom";
-import SearchBar from "./searchbar";
-import Itemdisplay from "./newitemdisplay";
+import SearchBar from "./SearchBar";
+import Itemdisplay from "./NewItemDisplay";
 import axios from "axios";
+import ScrollToTop from "./ScrollToTop";
+import { format } from 'date-fns';
 
-export default function Showitem({state}){
+export default function Showitem(){
     const [searchQuery, setSearchQuery] = useState('');
-    const [listdata, setListdata] = useState(null)
+    const [data, setdata] = useState(null)
     const [filteredItems, setFilteredItems] = useState([]);
 
+    ScrollToTop();
+
     useEffect(() => {
-        axios.get(`http://localhost:8000/${state}/`)
+        axios.get(`http://localhost:8000/`)
         .then((response) => {
             console.log(response.data);
-            setListdata(response.data);
+            setdata(response.data);
             setFilteredItems(response.data);
         })
         .catch((error) => {
             console.error('Error:', error);
             alert('An error occurred');
         });
-    }, [state]);
+    }, []);
 
-    if (!listdata) {
+    if (!data) {
         return <div>Loading...</div>;
     }
 
     const handleSearch = (query) => {
         setSearchQuery(query);
         if (query === '') {
-            setFilteredItems(listdata);
+            setFilteredItems(data);
         } else {
             setFilteredItems(
-                listdata.filter(item => 
-                    item.name.toLowerCase().includes(query.toLowerCase()) ||
-                    item.roll_number.toLowerCase().includes(query.toLowerCase()) ||
-                    item.date.toLowerCase().includes(query.toLowerCase()) ||
-                    item.department.toLowerCase().includes(query.toLowerCase()) ||
-                    item.subject.toLowerCase().includes(query.toLowerCase()) ||
-                    item.remarks.toLowerCase().includes(query.toLowerCase())||
-                    item.application_document.toLowerCase().includes(query.toLowerCase())||
+                data.filter(item =>
+                    (item.name && item.name.toLowerCase().includes(query.toLowerCase())) ||
+                    (item.roll_number && item.roll_number.toLowerCase().includes(query.toLowerCase())) ||
+                    (item.time && item.time.toLowerCase().includes(query.toLowerCase())) ||
+                    (item.department && item.department.toLowerCase().includes(query.toLowerCase())) ||
+                    (item.subject && item.subject.toLowerCase().includes(query.toLowerCase())) ||
+                    (item.remarks && item.remarks.toLowerCase().includes(query.toLowerCase())) ||
+                    (item.application_document && item.application_document.toLowerCase().includes(query.toLowerCase())) ||
                     item.id.toString().includes(query)
                 )
             );
         }
-    };
+    };    
 
     const Display = filteredItems.map((item)=>(
-        <Link to={{ pathname: `/${item.id}` , state: { item }}} key={item.id} className="links">
+        <Link to={{ pathname: `/${item.id}`}} key={item.id} className="links">
             <ListItem
                 id={item.id}
                 roll={item.roll_number}
-                date={item.date}
+                date={format(new Date(item.time), 'dd/MM/yyyy')}
                 name={item.name}
                 department={item.department}
                 subject={item.subject}
