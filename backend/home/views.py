@@ -9,10 +9,8 @@ from .serializers import *
 def home(request):
     applications=Application.objects.all()
     data=ApplicationSerializer(applications, many=True).data
+    data = sorted(data, key=lambda x: x['time'], reverse=True)
     return Response(data=data)
-
-
-
 
 #fetch
 @api_view(['GET'])

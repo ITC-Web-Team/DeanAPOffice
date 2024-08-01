@@ -6,10 +6,7 @@
 
 .navbar-container {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   margin: 10px;
   margin-bottom: 20px;
 }
@@ -24,8 +21,18 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.content-container {
+  display: flex;
+  justify-items: space-evenly;
+}
+
+.content-container > div {
+  width: 45vw;
+}
+
 .newentry-container {
-  max-width: 600px;
+  min-width: 600px;
+  width: 40%;
   margin: 1% auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -61,6 +68,16 @@
   font-size: 1rem;
 }
 
+.inputarea {
+  width: 100%;  
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  resize: none;
+}
+
 .label {
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 16px;
@@ -71,6 +88,21 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toplabel{
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  color: #2c3e50;
+  margin-bottom: 5px;
+  display: block;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 input, select{
@@ -149,6 +181,46 @@ select:focus{
   width: 90vw;
   max-width: 600px;
 }
+
+.edit-search-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.edit-search-container > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-search-result-container {
+  position: absolute;
+  top: 100%;  
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  z-index: 1;
+}
+
+.edit-search-result-container .links {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-search-result-container .links:hover {
+  background-color: #f8f9fa;
+}
+
+.edit-search-result-container .links *{
+  width: 33.33%;
+  padding: 10px;
+}
+
+
+
 
 .searchbar {
   border-radius: 20px;

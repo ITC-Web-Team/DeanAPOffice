@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Departments from '../../departments';
 
 export default function NewEntry() {
 
     const navigate = useNavigate();
 
+    // Get the current date in YYYY-MM-DD format
+    const currentDate = new Date().toISOString().split('T')[0];
+
     const [formData, setFormData] = useState({
+        date: currentDate,
         rollnumber: '',
         name: '',
         department: '',
@@ -17,7 +22,6 @@ export default function NewEntry() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name, value);
         setFormData(prevState => ({
             ...prevState,
             [name]: value
@@ -34,14 +38,14 @@ export default function NewEntry() {
             subject: formData.subject,
             remarks: formData.remark,
             application_document: formData.applicationdocument,
-        }
+        };
 
         try {
             const response = await axios.post('http://localhost:8000/compose/', data);
             console.log('Response:', response);
-            alert('Entry created successfully');
 
             setFormData({
+                date: currentDate,
                 rollnumber: '',
                 name: '',
                 department: '',
@@ -49,10 +53,8 @@ export default function NewEntry() {
                 remark: '',
                 applicationdocument: ''
             });
-        }
-        catch (error) {
+        } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred');
         }
 
         navigate(0);
@@ -64,6 +66,10 @@ export default function NewEntry() {
                 <h1 className="newentry-heading">NEW ENTRY</h1>
                 <form className="input-container" onSubmit={handleCreateClick}>
                     <div className="label">
+                        <label htmlFor="date">Date</label>
+                        <input type="date" name="date" className="input" value={formData.date} onChange={handleChange} />
+                    </div>
+                    <div className="label">
                         <label htmlFor="rollnumber">ROLL NUMBER</label>
                         <input type="text" name="rollnumber" className="input" value={formData.rollnumber} onChange={handleChange} />
                     </div>
@@ -73,7 +79,12 @@ export default function NewEntry() {
                     </div>
                     <div className="label">
                         <label htmlFor="department">DEPARTMENT</label>
-                        <input type="text" name="department" className="input" value={formData.department} onChange={handleChange} />
+                        <select name="department" id="department" className="input" value={formData.department} onChange={handleChange}>
+                            <option value="">Select Department</option>
+                            {Departments.map((department) => (
+                                <option key={department} value={department}>{department}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="label">
                         <label htmlFor="subject">SUBJECT</label>
@@ -81,7 +92,7 @@ export default function NewEntry() {
                     </div>
                     <div className="label">
                         <label htmlFor="remark">REMARK</label>
-                        <input type="text" name="remark" className="input" value={formData.remark} onChange={handleChange} />
+                        <textarea type="text" name="remark" className="inputarea" value={formData.remark} onChange={handleChange} />
                     </div>
                     <div className="label">
                         <label htmlFor="applicationdocument">TYPE</label>
@@ -100,9 +111,8 @@ export default function NewEntry() {
                     </div>
 
                     <div className="create-container">
-                        <button className="create" onClick={handleCreateClick} >
-                            <div > Create Entry
-                            </div>
+                        <button className="create" type="submit">
+                            <div>Create Entry</div>
                         </button>
                     </div>
                 </form>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import magnifyingglass from '../imgs/magnifying-glass.png';
 
 export default function SearchBar({ onSearch }) {
@@ -8,6 +8,10 @@ export default function SearchBar({ onSearch }) {
         e.preventDefault();
         onSearch(search);
     };
+
+    useEffect(() => {
+        onSearch(search);
+    }, [search, onSearch]);
 
     const handleChange = (e) => {
         const value = e.target.value;

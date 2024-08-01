@@ -23,7 +23,6 @@ export default function Showitem(){
         })
         .catch((error) => {
             console.error('Error:', error);
-            alert('An error occurred');
         });
     }, []);
 
@@ -38,6 +37,7 @@ export default function Showitem(){
         } else {
             setFilteredItems(
                 data.filter(item =>
+                    (item.id && item.id.toString().includes(query)) ||
                     (item.name && item.name.toLowerCase().includes(query.toLowerCase())) ||
                     (item.roll_number && item.roll_number.toLowerCase().includes(query.toLowerCase())) ||
                     (item.time && item.time.toLowerCase().includes(query.toLowerCase())) ||
