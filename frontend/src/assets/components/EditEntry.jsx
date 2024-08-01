@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { format, set } from 'date-fns';
 import Departments from '../../departments';
+import ip from '../../ip';
 
 export default function EditEntry() {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ export default function EditEntry() {
 
     const fetchList = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/`);
+            const response = await axios.get(`http://${ip}:8000/`);
             setData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -58,7 +59,7 @@ export default function EditEntry() {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:8000/fetch/${id}/`)
+            fetch(`http://${ip}:8000/fetch/${id}/`)
                 .then((response) => response.json())
                 .then((data) => {
                     setFormData({
@@ -109,7 +110,7 @@ export default function EditEntry() {
         };
 
         try {
-            const response = await axios.put(`http://localhost:8000/edit/`, data);
+            const response = await axios.put(`http://${ip}:8000/edit/`, data);
             console.log('Response:', response);
             alert('Entry updated successfully!');
             window.location.reload();

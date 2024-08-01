@@ -6,6 +6,7 @@ import Itemdisplay from "./NewItemDisplay";
 import axios from "axios";
 import ScrollToTop from "./ScrollToTop";
 import { format } from 'date-fns';
+import ip from "../../ip";
 
 export default function Showitem(){
     const [searchQuery, setSearchQuery] = useState('');
@@ -15,7 +16,7 @@ export default function Showitem(){
     ScrollToTop();
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/`)
+        axios.get(`http://${ip}:8000/`)
         .then((response) => {
             console.log(response.data);
             setdata(response.data);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Departments from '../../departments';
+import ip from "../../ip"
 
 export default function NewEntry() {
 
@@ -41,7 +42,7 @@ export default function NewEntry() {
         };
 
         try {
-            const response = await axios.post('http://localhost:8000/compose/', data);
+            const response = await axios.post(`http://${ip}:8000/compose/`, data);
             console.log('Response:', response);
 
             setFormData({
