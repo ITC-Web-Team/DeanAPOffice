@@ -40,7 +40,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "dean.ap.office.tech-iitb.org"
+    "dean.ap.office.tech-iitb.org",
+    "dean.backend.tech-iitb.org"
 ]
 
 
