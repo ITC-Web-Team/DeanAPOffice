@@ -1,4 +1,4 @@
-import React,{useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ListItem from "./ListLabel";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
@@ -12,13 +12,11 @@ export default function Showitem(){
     const [searchQuery, setSearchQuery] = useState('');
     const [data, setdata] = useState(null)
     const [filteredItems, setFilteredItems] = useState([]);
-
     ScrollToTop();
 
     useEffect(() => {
         axios.get(`http://${ip}:8000/`)
         .then((response) => {
-            console.log(response.data);
             setdata(response.data);
             setFilteredItems(response.data);
         })
@@ -45,8 +43,7 @@ export default function Showitem(){
                     (item.department && item.department.toLowerCase().includes(query.toLowerCase())) ||
                     (item.subject && item.subject.toLowerCase().includes(query.toLowerCase())) ||
                     (item.remarks && item.remarks.toLowerCase().includes(query.toLowerCase())) ||
-                    (item.application_document && item.application_document.toLowerCase().includes(query.toLowerCase())) ||
-                    item.id.toString().includes(query)
+                    (item.application_document && item.application_document.toLowerCase().includes(query.toLowerCase()))
                 )
             );
         }

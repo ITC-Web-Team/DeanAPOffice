@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { format, set } from 'date-fns';
 import Departments from '../../departments';
 import ip from '../../ip';
 
@@ -36,7 +35,7 @@ export default function EditEntry() {
     useEffect(() => {
         if (searchQuery.id === '') setFilteredItems([]);
         else if (data) setFilteredItems(data.filter(item => item.id && item.id.toString().includes(searchQuery.id)));
-    }, [searchQuery.id]);
+    }, [searchQuery.id, data]);
 
     useEffect(() => {
         if (searchQuery.rollnumber === '') setFilteredItems([]);
@@ -82,14 +81,6 @@ export default function EditEntry() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    const handleSearchChange = (e) => {
-        const { name, value } = e.target;
-        setSearchQuery((prevState) => ({
             ...prevState,
             [name]: value
         }));
