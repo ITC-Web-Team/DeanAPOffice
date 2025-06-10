@@ -16,7 +16,7 @@ export default function Showitem(){
     ScrollToTop();
 
     useEffect(() => {
-        axios.get(`http://${ip}:8000/`)
+        axios.get(`http://${ip}/`)
         .then((response) => {
             console.log(response.data);
             setdata(response.data);
