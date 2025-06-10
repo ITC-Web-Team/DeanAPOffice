@@ -40,7 +40,6 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "dean.ap.office.tech-iitb.org",
     "dean.backend.tech-iitb.org"
 ]
 
@@ -75,6 +74,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
+    "dean.ap.office.tech-iitb.org",
+
 ]
 
 ROOT_URLCONF = 'core.urls'
