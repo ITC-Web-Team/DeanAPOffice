@@ -50,7 +50,7 @@ export default function EditEntry() {
 
     const fetchList = async () => {
         try {
-            const response = await axios.get(`http://${ip}/`);
+            const response = await axios.get(`https://${ip}/`);
             setData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -59,7 +59,7 @@ export default function EditEntry() {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://${ip}/fetch/${id}/`)
+            fetch(`https://${ip}/fetch/${id}/`)
                 .then((response) => response.json())
                 .then((data) => {
                     setFormData({
@@ -110,7 +110,7 @@ export default function EditEntry() {
         };
 
         try {
-            const response = await axios.put(`http://${ip}/edit/`, data);
+            const response = await axios.put(`https://${ip}/edit/`, data);
             console.log('Response:', response);
             alert('Entry updated successfully!');
             window.location.reload();

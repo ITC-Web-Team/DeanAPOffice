@@ -42,7 +42,7 @@ export default function NewEntry() {
         };
 
         try {
-            const response = await axios.post(`http://${ip}compose/`, data);
+            const response = await axios.post(`https://${ip}compose/`, data);
             console.log('Response:', response);
 
             setFormData({
