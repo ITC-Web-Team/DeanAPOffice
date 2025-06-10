@@ -75,6 +75,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
+    "https://dean.ap.office.tech-iitb.org",
+    "https://dean.backend.tech-iitb.org",
 ]
 
 ROOT_URLCONF = 'core.urls'
