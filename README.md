@@ -23,3 +23,8 @@ This project is an application management system for the Dean AP Office, IIT Bom
 - Convert an 'inward' application to an 'outward' application after review and editing
 - Updating an existing application
   
+# Commands:
+- python manage.py makemigrations
+- python manage.py migrate       
+- python manage.py runserver   
+- python manage.py createsuperuser  
