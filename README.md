@@ -27,4 +27,26 @@ This project is an application management system for the Dean AP Office, IIT Bom
 - python manage.py makemigrations
 - python manage.py migrate       
 - python manage.py runserver   
-- python manage.py createsuperuser  
+- python manage.py createsuperuser
+
+## 🚀 Quick Start (Local Development)
+
+### First Time Setup:
+1. **Double-click `initial-setup.bat`** - Run this ONCE to install everything
+2. Wait for setup to complete
+
+### Daily Use (After Setup):
+**Just double-click `start-all.bat`** - Starts both servers instantly!
+
+### Alternative Run Options:
+- **PowerShell**: Right-click `quick-start.ps1` → Run with PowerShell  
+- **Separate**: Use `start-backend.bat` and `start-frontend.bat` individually
+
+### Access Points:
+- **Main Application**: http://localhost:3000
+- **API Endpoints**: http://localhost:8000
+- **Admin Panel**: http://localhost:8000/admin
+
+### For Network Access:
+- Find your IP: `ipconfig` 
+- Others can access: `http://YOUR_IP:3000`  
