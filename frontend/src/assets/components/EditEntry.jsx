@@ -59,7 +59,7 @@ export default function EditEntry() {
 
     useEffect(() => {
         if (id) {
-            fetch(`https://${ip}/fetch/${id}/`)
+            fetch(`http://${ip}:8000/fetch/${id}/`)
                 .then((response) => response.json())
                 .then((data) => {
                     setFormData({
