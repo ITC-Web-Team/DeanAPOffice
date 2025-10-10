@@ -40,6 +40,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "192.168.0.149",  # Server PC's WiFi IP address
     "dean.ap.office.tech-iitb.org",
     "dean.backend.tech-iitb.org"
 ]
@@ -75,6 +76,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
+    "http://192.168.0.149:3000",  # Allow frontend from server PC's network IP
+    "http://192.168.0.149:3001",
     "https://dean.ap.office.tech-iitb.org",
     "https://dean.backend.tech-iitb.org",
 ]
