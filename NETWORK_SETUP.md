@@ -5,6 +5,15 @@ This guide explains how to access the Dean AP Office application from other devi
 ## Server PC's Network IP Address
 **192.168.0.149** (WiFi adapter)
 
+## 🎯 Automatic Backend Detection
+
+The frontend is configured to **automatically detect** whether you're accessing it locally or from the network:
+
+- **When accessed via `http://localhost:3000`** → Connects to backend at `http://localhost:8000`
+- **When accessed via `http://192.168.0.149:3000`** → Connects to backend at `http://192.168.0.149:8000`
+
+This means you don't need to change any configuration - it works both ways!
+
 ## Setup Instructions
 
 ### 1. Start the Backend Server (on the server PC)
@@ -37,13 +46,15 @@ The frontend will be accessible at:
 - From server PC: `http://localhost:3000` or `http://192.168.0.149:3000`
 - From other devices: `http://192.168.0.149:3000`
 
-### 3. Access from Other Devices
+### 3. Access Options
 
-On any device connected to the same WiFi network (192.168.0.x):
+**Option A: Work Locally on Server PC**
+- Open browser and go to: `http://localhost:3000`
+- Frontend automatically connects to `http://localhost:8000`
 
-1. Open a web browser
-2. Go to: `http://192.168.0.149:3000`
-3. You should see the Dean AP Office application with all the data!
+**Option B: Access from Other Devices on Same WiFi**
+- Open browser and go to: `http://192.168.0.149:3000`
+- Frontend automatically connects to `http://192.168.0.149:8000`
 
 ## Troubleshooting
 
@@ -75,13 +86,17 @@ New-NetFirewallRule -DisplayName "Django Backend" -Direction Inbound -LocalPort 
 New-NetFirewallRule -DisplayName "React Frontend" -Direction Inbound -LocalPort 3000 -Protocol TCP -Action Allow
 ```
 
-## Switching Back to Local-Only Development
+## Local Development (No Changes Needed!)
 
-If you want to work locally on just this PC again:
+The application now works **automatically** for both scenarios:
 
-1. **Frontend:** Change `ip` in `frontend/src/ip.js` back to `'localhost'`
-2. **Backend:** Start with `python manage.py runserver` (without 0.0.0.0)
-3. **Frontend:** Start with `npm start` (without setting HOST)
+**For local-only work on the server PC:**
+- Just access `http://localhost:3000` - it will connect to `http://localhost:8000`
+- No need to change any configuration!
+
+**For network access:**
+- Access via `http://192.168.0.149:3000` from any device on the WiFi
+- The frontend automatically detects this and connects to `http://192.168.0.149:8000`
 
 ## Notes
 
